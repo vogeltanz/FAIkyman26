@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace CodeMonkey.HealthSystemCM {
 
@@ -15,6 +17,8 @@ namespace CodeMonkey.HealthSystemCM {
 
         private HealthSystem healthSystem;
 
+        public UnityEvent<GameObject> OnDead_HSC;
+
 
         private void Awake() {
             // Create Health System
@@ -23,6 +27,12 @@ namespace CodeMonkey.HealthSystemCM {
             if (startingHealthAmount != 0) {
                 healthSystem.SetHealth(startingHealthAmount);
             }
+
+            healthSystem.OnDead += HealthSystem_OnDead;
+        }
+
+        private void HealthSystem_OnDead(object sender, EventArgs e) {
+            OnDead_HSC?.Invoke(gameObject);
         }
 
         /// <summary>

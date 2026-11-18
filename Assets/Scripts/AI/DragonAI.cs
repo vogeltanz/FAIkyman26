@@ -20,6 +20,9 @@ public class DragonAI : MonoBehaviour
     [SerializeField]
     float timeToForgetPlayer = 3f;
 
+    [SerializeField]
+    GameObject mouth;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -27,6 +30,9 @@ public class DragonAI : MonoBehaviour
         var dragonWalkSMB = animator.GetBehaviour<DragonWalkSMB>();
         dragonWalkSMB.PlayerPosition = player.transform;
         dragonWalkSMB.Speed = speed;
+
+        var dragonAttackSMB = animator.GetBehaviour<DragonAttackSMB>();
+        dragonAttackSMB.Mouth = mouth;
     }
 
     public void CheckPlayerVisibility(bool isVisible)

@@ -3,16 +3,16 @@ using UnityEngine.Events;
 
 public class DragonMouth : MonoBehaviour
 {
-    public UnityEvent<float> PlayerHit;
+    public UnityEvent<GameObject, float> PlayerHit;
 
     [SerializeField]
     float hitDamage = 10f;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerHit?.Invoke(hitDamage);
+            PlayerHit?.Invoke(collision.gameObject, hitDamage);
         }
     }
 }
